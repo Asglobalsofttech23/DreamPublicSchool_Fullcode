@@ -4,15 +4,15 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 const styles = {
   logoutButton: {
-    backgroundColor: "black",
+    backgroundColor: 'black',
     color: 'white',
     height: '40px',
     position: 'absolute',
     right: '50px',
     top: '10px',
     display: 'flex',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+  }
 };
 
 export default function Search() {
@@ -43,11 +43,11 @@ export default function Search() {
         '&:hover': {
           background: 'linear-gradient(to right, #00BFFF, #6A5ACD)', // Reverse gradient on hover
           transform: 'scale(1.05)', // Slightly enlarge on hover
-          boxShadow: '0 6px 12px rgba(0, 0, 0, 0.4)', // Increase shadow on hover
-        },
+          boxShadow: '0 6px 12px rgba(0, 0, 0, 0.4)' // Increase shadow on hover
+        }
       }}
     >
-      <h1 style={{ fontWeight: "bolder", fontFamily: "Times", margin: 0, zIndex: 1 }}>Dream Public School</h1>
+      <h1 style={{ fontWeight: 'bolder', fontFamily: 'Times', margin: 0, zIndex: 1 }}>Dream Public School</h1>
       <Button onClick={handleLogout} variant="contained" sx={styles.logoutButton} startIcon={<LogoutIcon />}>
         Logout
       </Button>

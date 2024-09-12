@@ -11,7 +11,7 @@ import FeesDomain from './FeesDomai';
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboards,studentdomains,teacherdomains,FeesDomain, utilities]
+  items: [dashboards, studentdomains, teacherdomains, FeesDomain]
 };
 
 export default menuItems;

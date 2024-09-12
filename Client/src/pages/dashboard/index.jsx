@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Grid, Typography, Box, Button } from '@mui/material';
 import axios from 'axios';
@@ -6,61 +5,46 @@ import config from '../../config';
 import UniqueVisitorCard from './UniqueVisitorCard';
 import SmallCalendar from './SmallCalender';
 import { Link, useNavigate } from 'react-router-dom';
-import { PiStudent } from "react-icons/pi";
-import { IoLogOutOutline, IoPeopleSharp } from "react-icons/io5";
-import { RiMoneyRupeeCircleFill } from "react-icons/ri";
+import { PiStudent } from 'react-icons/pi';
+import { IoLogOutOutline, IoPeopleSharp } from 'react-icons/io5';
+import { RiMoneyRupeeCircleFill } from 'react-icons/ri';
 import { Bar } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
 // Register all necessary components for Chart.js
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const styles = {
   box: {
-    fontWeight: "bold",
-    height: "130px",
-    width: "100%",
-    borderRadius: "15px",
-    padding: "10px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    transition: "transform 0.3s, background-color 0.3s",
-    backgroundColor: "#9EA0D8", // Initial color
-    "&:hover": {
-      transform: "scale(1.05)",
-      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-      backgroundColor: "#FFC0CB" // Color on hover
+    fontWeight: 'bold',
+    height: '130px',
+    width: '100%',
+    borderRadius: '15px',
+    padding: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    transition: 'transform 0.3s, background-color 0.3s',
+    backgroundColor: '#9EA0D8', // Initial color
+    '&:hover': {
+      transform: 'scale(1.05)',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+      backgroundColor: '#FFC0CB' // Color on hover
     }
   },
   link: {
     color: 'white',
-    textDecoration: "none"
+    textDecoration: 'none'
   },
   icon: {
-    height: "70px",
-    width: "70px",
-    color: "blue"
+    height: '70px',
+    width: '70px',
+    color: 'blue'
   },
   logoutButton: {
     position: 'absolute',
-    backgroundColor: "black",
+    backgroundColor: 'black',
     color: 'white',
     top: '60px',
     right: '10px',
@@ -77,7 +61,8 @@ export default function DashboardDefault() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`${config.apiURL}/staffs/getStaffs`)
+    axios
+      .get(`${config.apiURL}/staffs/getStaffs`)
       .then((res) => {
         setStaffsCount(res.data.length);
       })
@@ -85,7 +70,8 @@ export default function DashboardDefault() {
         console.error('Error fetching staff:', error);
       });
 
-    axios.get(`${config.apiURL}/students/getStudentsCount`)
+    axios
+      .get(`${config.apiURL}/students/getStudentsCount`)
       .then((res) => {
         setStudentsCount(res.data.total_count);
       })
@@ -95,7 +81,8 @@ export default function DashboardDefault() {
   }, []);
 
   useEffect(() => {
-    axios.get(`${config.apiURL}/dashboard/totalPaidAmount/${selectedYear}`)
+    axios
+      .get(`${config.apiURL}/dashboard/totalPaidAmount/${selectedYear}`)
       .then((res) => {
         setTotalRevenue(res.data);
       })
@@ -104,37 +91,38 @@ export default function DashboardDefault() {
       });
   }, [selectedYear]);
 
-  useEffect(() => {
-    axios.get(`${config.apiURL}/dashboard/monthlyData`)
-      .then((res) => {
-        setLineChartData({
-          labels: res.data.labels,
-          values: res.data.values
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching line chart data:', error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${config.apiURL}/dashboard/monthlyData`)
+  //     .then((res) => {
+  //       setLineChartData({
+  //         labels: res.data.labels,
+  //         values: res.data.values
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching line chart data:', error);
+  //     });
+  // }, []);
 
   const chartData = {
     labels: lineChartData.labels,
     datasets: [
       {
         label: 'New Admission',
-        data: lineChartData.values.map(item => item.newAdmissions),
+        data: lineChartData.values.map((item) => item.newAdmissions),
         backgroundColor: 'rgba(0, 0, 255, 0.2)',
         borderColor: 'blue',
-        borderWidth: 1,
+        borderWidth: 1
       },
       {
         label: 'Total Students',
-        data: lineChartData.values.map(item => item.totalStudents),
+        data: lineChartData.values.map((item) => item.totalStudents),
         backgroundColor: 'rgba(0, 255, 0, 0.2)',
         borderColor: 'green',
-        borderWidth: 1,
+        borderWidth: 1
       }
-    ],
+    ]
   };
 
   const handleLogout = () => {
@@ -143,87 +131,85 @@ export default function DashboardDefault() {
     sessionStorage.clear();
     navigate('/', { replace: true });
     window.location.reload();
-    
   };
 
   const chartOptions = {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: 'top'
       },
       tooltip: {
         callbacks: {
-          label: (context) => `${context.dataset.label}: ${context.raw}`,
-        },
-      },
+          label: (context) => `${context.dataset.label}: ${context.raw}`
+        }
+      }
     },
     scales: {
       x: {
         title: {
           display: true,
-          text: 'Month',
+          text: 'Month'
         },
-        stacked: true,
+        stacked: true
       },
       y: {
         title: {
           display: true,
-          text: 'Count',
+          text: 'Count'
         },
-        stacked: true,
-      },
-    },
+        stacked: true
+      }
+    }
   };
 
   return (
     <Box sx={{ position: 'relative', height: '100vh', width: '100%' }}>
-     
-      <Grid container rowSpacing={6.5} columnSpacing={2.75} style={{ background: "linear-gradient(to right,lightblue, pink)" }}>
+      <Grid container rowSpacing={6.5} columnSpacing={2.75} style={{ background: 'linear-gradient(to right,lightblue, pink)' }}>
         <Grid item xs={12} sx={{ mb: -2.25 }}>
-          <Typography variant="h6" >Dashboard</Typography>
+          <Typography variant="h6">Dashboard</Typography>
         </Grid>
 
         <Grid item xs={12} sm={8} md={4} lg={3}>
-          <Link to='/newAdmission' style={{ color: 'white', textDecoration: "none" }}>
+          <Link to="/newAdmission" style={{ color: 'white', textDecoration: 'none' }}>
             <div
               style={{
-                backgroundColor: "#5251AC",
-                fontWeight: "bold",
-                height: "130px",
-                width: "250px",
-                borderRadius: "15px",
-                padding: "10px",
+                backgroundColor: '#5251AC',
+                fontWeight: 'bold',
+                height: '130px',
+                width: '250px',
+                borderRadius: '15px',
+                padding: '10px'
               }}
             >
-              <span style={{ color: "white", display: "block", marginBottom: "10px", marginTop: "10px" }}>
-                <h5>  New Enquiry Admission </h5>
+              <span style={{ color: 'white', display: 'block', marginBottom: '10px', marginTop: '10px' }}>
+                <h5> New Enquiry Admission </h5>
               </span>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <PiStudent style={{ height: "40px", width: "50px", color: "white" }} />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <PiStudent style={{ height: '40px', width: '50px', color: 'white' }} />
               </div>
             </div>
           </Link>
         </Grid>
 
         <Grid item xs={12} sm={8} md={4} lg={3}>
-          <Link to='/StudentsBooking' style={{ color: "white", textDecoration: "none" }}>
+          <Link to="/StudentsBooking" style={{ color: 'white', textDecoration: 'none' }}>
             <div
               style={{
-                backgroundColor: "#6789F5",
-                fontWeight: "bold",
-                height: "130px",
-                width: "250px",
-                borderRadius: "15px",
-                padding: "10px",
+                backgroundColor: '#6789F5',
+                fontWeight: 'bold',
+                height: '130px',
+                width: '250px',
+                borderRadius: '15px',
+                padding: '10px'
               }}
             >
-              <span style={{ color: "white", display: "block", marginBottom: "10px", marginTop: "10px" }}>
+              <span style={{ color: 'white', display: 'block', marginBottom: '10px', marginTop: '10px' }}>
                 <h5> Booking Students </h5>
               </span>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <PiStudent style={{ height: "40px", width: "50px", color: "white" }} />
-                <h2 style={{ marginLeft: "10px", marginRight: "10px", color: "white", fontSize: "24px", textAlign: "center" }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <PiStudent style={{ height: '40px', width: '50px', color: 'white' }} />
+                <h2 style={{ marginLeft: '10px', marginRight: '10px', color: 'white', fontSize: '24px', textAlign: 'center' }}>
                   {/* {studentsCount} */}
                 </h2>
               </div>
@@ -232,25 +218,25 @@ export default function DashboardDefault() {
         </Grid>
 
         <Grid item xs={12} sm={8} md={4} lg={3}>
-          <Link to='/allstudentlist' style={{ color: "white", textDecoration: "none" }}>
+          <Link to="/allstudentlist" style={{ color: 'white', textDecoration: 'none' }}>
             <div
               style={{
-                backgroundColor: "#9EA0D8",
-                fontWeight: "bold",
-                height: "130px",
-                width: "250px",
-                borderRadius: "15px",
-                padding: "10px",
+                backgroundColor: '#9EA0D8',
+                fontWeight: 'bold',
+                height: '130px',
+                width: '250px',
+                borderRadius: '15px',
+                padding: '10px'
               }}
             >
-              <span style={{ color: "white", display: "block", marginBottom: "10px", marginTop: "10px" }}
-                className='hover'
-              >
+              <span style={{ color: 'white', display: 'block', marginBottom: '10px', marginTop: '10px' }} className="hover">
                 <h5> New Admissions</h5>
               </span>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <IoPeopleSharp style={{ height: "40px", width: "50px", color: "white" }} />
-                <h2 style={{ marginLeft: "10px", marginRight: "10px", color: "white", fontSize: "24px", textAlign: "center" }}>{studentsCount}</h2>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <IoPeopleSharp style={{ height: '40px', width: '50px', color: 'white' }} />
+                <h2 style={{ marginLeft: '10px', marginRight: '10px', color: 'white', fontSize: '24px', textAlign: 'center' }}>
+                  {studentsCount}
+                </h2>
               </div>
             </div>
           </Link>

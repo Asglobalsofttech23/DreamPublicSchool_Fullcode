@@ -1,46 +1,44 @@
-
 import { useEffect, useState } from 'react';
 import { Grid, Typography, Box, Button, TextField } from '@mui/material';
 import axios from 'axios';
 import config from '../../config';
-import { PiStudent } from "react-icons/pi";
-import { IoPeopleSharp } from "react-icons/io5";
-import { RiMoneyRupeeCircleFill } from "react-icons/ri";
+import { PiStudent } from 'react-icons/pi';
+import { IoPeopleSharp } from 'react-icons/io5';
+import { RiMoneyRupeeCircleFill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import FeeCollectionChart from './IncomeAreaChart';
 
-
 const styles = {
   box: {
-    fontWeight: "bold",
-    height: "130px",
-    width: "100%",
-    borderRadius: "15px",
-    padding: "10px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    transition: "transform 0.3s, background-color 0.3s",
-    backgroundColor: "#9EA0D8", // Initial color
-    "&:hover": {
-      transform: "scale(1.05)",
-      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-      backgroundColor: "#FFC0CB" // Color on hover
+    fontWeight: 'bold',
+    height: '130px',
+    width: '100%',
+    borderRadius: '15px',
+    padding: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    transition: 'transform 0.3s, background-color 0.3s',
+    backgroundColor: '#9EA0D8', // Initial color
+    '&:hover': {
+      transform: 'scale(1.05)',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+      backgroundColor: '#FFC0CB' // Color on hover
     }
   },
   link: {
     color: 'white',
-    textDecoration: "none"
+    textDecoration: 'none'
   },
   icon: {
-    height: "70px",
-    width: "70px",
-    color: "blue"
+    height: '70px',
+    width: '70px',
+    color: 'blue'
   },
   logoutButton: {
     position: 'absolute',
-    backgroundColor: "black",
+    backgroundColor: 'black',
     color: 'white',
     top: '35px',
     right: '10px',
@@ -60,7 +58,8 @@ export default function SuperDashboardDefault() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`${config.apiURL}/staffs/getStaffs`)
+    axios
+      .get(`${config.apiURL}/staffs/getStaffs`)
       .then((res) => {
         setStaffsCount(res.data.length);
       })
@@ -68,7 +67,8 @@ export default function SuperDashboardDefault() {
         console.error('Error fetching staff:', error);
       });
 
-    axios.get(`${config.apiURL}/students/getStudentsCount`)
+    axios
+      .get(`${config.apiURL}/students/getStudentsCount`)
       .then((res) => {
         setStudentsCount(res.data.total_count);
       })
@@ -76,7 +76,8 @@ export default function SuperDashboardDefault() {
         console.error('Error fetching student count:', error);
       });
 
-    axios.get(`${config.apiURL}/dashboard/totalPaidAmount/${selectedYear}`)
+    axios
+      .get(`${config.apiURL}/dashboard/totalPaidAmount/${selectedYear}`)
       .then((res) => {
         setTotalRevenue(res.data.total_paid_amount);
       })
@@ -84,7 +85,8 @@ export default function SuperDashboardDefault() {
         console.error('Error fetching revenue:', error);
       });
 
-    axios.get(`${config.apiURL}/students/getSiblings`)
+    axios
+      .get(`${config.apiURL}/students/getSiblings`)
       .then((res) => {
         const { siblingsCount, siblingsData } = res.data;
         setSiblingCount(siblingsCount);
@@ -94,7 +96,8 @@ export default function SuperDashboardDefault() {
         console.error('Error fetching siblings:', error);
       });
 
-    axios.get(`${config.apiURL}/students/present`)
+    axios
+      .get(`${config.apiURL}/students/present`)
       .then((res) => {
         setStudentPresent(res.data.present_count);
       })
@@ -102,13 +105,13 @@ export default function SuperDashboardDefault() {
         console.error('Error fetching student present count:', error);
       });
 
-    axios.get(`${config.apiURL}/staffs/present`)
-      .then((res) => {
-        setStaffPresent(res.data.present_count);
-      })
-      .catch((error) => {
-        console.error('Error fetching staff present count:', error);
-      });
+    // axios.get(`${config.apiURL}/staffs/present`)
+    //   .then((res) => {
+    //     setStaffPresent(res.data.present_count);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error fetching staff present count:', error);
+    //   });
   }, [selectedYear]);
 
   const handleFeesClick = () => {
@@ -141,25 +144,25 @@ export default function SuperDashboardDefault() {
         Logout
       </Button> */}
 
-      <Grid container rowSpacing={4.5} columnSpacing={2.75} style={{ background: "linear-gradient(to right, lightblue, pink)" }}>
+      <Grid container rowSpacing={4.5} columnSpacing={2.75} style={{ background: 'linear-gradient(to right, lightblue, pink)' }}>
         <Grid item xs={12} sx={{ mb: -2.25 }}>
           <Typography variant="h5">Dashboard</Typography>
         </Grid>
 
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Link to='/addStudent' style={{ textDecoration: 'none' }}>
+          <Link to="/addStudent" style={{ textDecoration: 'none' }}>
             <Box
               sx={{
-                backgroundColor: "#5251AC",
-                fontWeight: "bold",
-                height: "130px",
-                width: "250px",
-                borderRadius: "15px",
-                padding: "10px",
-                color: "white",
-                cursor: "pointer",
-                "&:hover": {
-                  backgroundColor: "#3f3b9e",
+                backgroundColor: '#5251AC',
+                fontWeight: 'bold',
+                height: '130px',
+                width: '250px',
+                borderRadius: '15px',
+                padding: '10px',
+                color: 'white',
+                cursor: 'pointer',
+                '&:hover': {
+                  backgroundColor: '#3f3b9e'
                 }
               }}
               onClick={handleFeesClick}
@@ -168,8 +171,10 @@ export default function SuperDashboardDefault() {
                 New Admission
               </Typography>
               <Box display="flex" alignItems="center">
-                <PiStudent style={{ height: "40px", width: "50px" }} />
-                <Typography variant="h4" ml="auto">{studentsCount}</Typography>
+                <PiStudent style={{ height: '40px', width: '50px' }} />
+                <Typography variant="h4" ml="auto">
+                  {studentsCount}
+                </Typography>
               </Box>
               <Typography variant="body2">This Month</Typography>
               <Typography variant="h6">0</Typography>
@@ -178,19 +183,19 @@ export default function SuperDashboardDefault() {
         </Grid>
 
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Link to='/allstudentlist' style={{ textDecoration: 'none' }}>
+          <Link to="/allstudentlist" style={{ textDecoration: 'none' }}>
             <Box
               sx={{
-                backgroundColor: "#6789F5",
-                fontWeight: "bold",
-                height: "130px",
-                width: "250px",
-                borderRadius: "15px",
-                padding: "10px",
-                color: "white",
-                cursor: "pointer",
-                "&:hover": {
-                  backgroundColor: "#5677e4",
+                backgroundColor: '#6789F5',
+                fontWeight: 'bold',
+                height: '130px',
+                width: '250px',
+                borderRadius: '15px',
+                padding: '10px',
+                color: 'white',
+                cursor: 'pointer',
+                '&:hover': {
+                  backgroundColor: '#5677e4'
                 }
               }}
               onClick={handleTotalStudentClick}
@@ -199,27 +204,29 @@ export default function SuperDashboardDefault() {
                 Total Students
               </Typography>
               <Box display="flex" alignItems="center" justifyContent="center">
-                <PiStudent style={{ height: "40px", width: "50px" }} />
-                <Typography variant="h4" mx="10px">{studentsCount}</Typography>
+                <PiStudent style={{ height: '40px', width: '50px' }} />
+                <Typography variant="h4" mx="10px">
+                  {studentsCount}
+                </Typography>
               </Box>
             </Box>
           </Link>
         </Grid>
 
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Link to='/allstaffs' style={{ textDecoration: 'none' }}>
+          <Link to="/allstaffs" style={{ textDecoration: 'none' }}>
             <Box
               sx={{
-                backgroundColor: "#9EA0D8",
-                fontWeight: "bold",
-                height: "130px",
-                width: "250px",
-                borderRadius: "15px",
-                padding: "10px",
-                color: "white",
-                cursor: "pointer",
-                "&:hover": {
-                  backgroundColor: "#7f81c2",
+                backgroundColor: '#9EA0D8',
+                fontWeight: 'bold',
+                height: '130px',
+                width: '250px',
+                borderRadius: '15px',
+                padding: '10px',
+                color: 'white',
+                cursor: 'pointer',
+                '&:hover': {
+                  backgroundColor: '#7f81c2'
                 }
               }}
               onClick={handleTotalStaffClick}
@@ -228,27 +235,29 @@ export default function SuperDashboardDefault() {
                 Total Staffs
               </Typography>
               <Box display="flex" alignItems="center" justifyContent="center">
-                <IoPeopleSharp style={{ height: "40px", width: "50px" }} />
-                <Typography variant="h4" mx="10px">{staffsCount}</Typography>
+                <IoPeopleSharp style={{ height: '40px', width: '50px' }} />
+                <Typography variant="h4" mx="10px">
+                  {staffsCount}
+                </Typography>
               </Box>
             </Box>
           </Link>
         </Grid>
 
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Link to='' style={{ textDecoration: 'none' }}>
+          <Link to="" style={{ textDecoration: 'none' }}>
             <Box
               sx={{
-                backgroundColor: "#FA8892",
-                fontWeight: "bold",
-                height: "130px",
-                width: "250px",
-                borderRadius: "15px",
-                padding: "10px",
-                color: "white",
-                cursor: "pointer",
-                "&:hover": {
-                  backgroundColor: "#f87580",
+                backgroundColor: '#FA8892',
+                fontWeight: 'bold',
+                height: '130px',
+                width: '250px',
+                borderRadius: '15px',
+                padding: '10px',
+                color: 'white',
+                cursor: 'pointer',
+                '&:hover': {
+                  backgroundColor: '#f87580'
                 }
               }}
               onClick={handleRevenueClick}
@@ -257,8 +266,10 @@ export default function SuperDashboardDefault() {
                 Total Revenue
               </Typography>
               <Box display="flex" alignItems="center" justifyContent="center">
-                <RiMoneyRupeeCircleFill style={{ height: "40px", width: "50px" }} />
-                <Typography variant="h4" mx="10px">{totalRevenue ? totalRevenue : "Loading..."}</Typography>
+                <RiMoneyRupeeCircleFill style={{ height: '40px', width: '50px' }} />
+                <Typography variant="h4" mx="10px">
+                  {totalRevenue ? totalRevenue : 'Loading...'}
+                </Typography>
               </Box>
             </Box>
           </Link>

@@ -21,7 +21,6 @@ const icons = {
   AntDesignOutlined,
   LoadingOutlined,
   AppstoreAddOutlined
-
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -31,128 +30,56 @@ const admindomains = {
   title: 'Student Domains',
   type: 'group',
   children: [
-    // {
-    //   id: 'student-index',
-    //   title: 'Students',
-    //   type: 'item',
-    //   url: '/allStudents',
-    //   icon: icons.SchoolIcon
-    // },
-
     {
       id: 'student-index',
+      key: 'student-index', // unique key added
       title: 'New Admission',
       type: 'item',
       url: '/newAdmission',
       icon: icons.SchoolIcon
     },
-   
     {
       id: 'students-index',
+      key: 'students-index', // unique key added
       title: 'Booking',
       type: 'item',
       url: '/StudentsBooking',
       icon: icons.SchoolIcon
     },
-    // {
-    //   id: 'staff-index',
-    //   title: 'Admission',
-    //   type: 'item',
-    //   url: '/allstaffs',
-    //   icon: icons.GroupIcon,
-
-    // },
-
-     {
+    {
       id: 'studentss-index',
+      key: 'studentss-index', // unique key added
       title: 'Student list',
       type: 'item',
       url: '/allstudentlist',
-      icon: icons.GroupIcon,
-
+      icon: icons.GroupIcon
     },
     {
       id: 'studentssS-index',
+      key: 'studentssS-index', // unique key added
       title: 'Student Allocation',
       type: 'item',
       url: '/allocation',
-      icon: icons.GroupIcon,
-
+      icon: icons.GroupIcon
     },
     {
       id: 'classs-index',
+      key: 'classs-index', // unique key added
       title: 'Classes',
       type: 'item',
       url: '/allclass',
-      icon: icons.GroupIcon,
-
-    },   
+      icon: icons.GroupIcon
+    },
     {
       id: 'classsnew-index',
+      key: 'classsnew-index', // unique key added
       title: 'New academic Allocate',
       type: 'item',
       url: '/classAllocation',
-      icon: icons.GroupIcon,
-
-    },
+      icon: icons.GroupIcon
+    }
   ]
 };
 
-// const teacherdomain={
-//   id: 'Entries',
-//   title: 'Fields',
-//   type: 'group',
-//   children: [
-   
-//     // {
-//     //   id: 'class-students',
-//     //   title: 'class-Students',
-//     //   type: 'item',
-//     //   url: '/classstudents',
-//     //   icon: icons.SchoolIcon
-//     // },
-//     {
-//       id: 'class-students',
-//       title: 'Teacher',
-//       type: 'item',
-//       url: '/classstudents',
-//       icon: icons.SchoolIcon
-//     },
-//     {
-//       id: 'Attendance',
-//       title: 'Attendance',
-//       type: 'item',
-//       url: '/attendance',
-//       icon: icons.SchoolIcon
-//     },
-//     {
-//       id: 'Mark allocation',
-//       title: 'Mark allocation',
-//       type: 'item',
-//       url: '/exams',
-//       icon: icons.SchoolIcon
-//     },
-//     {
-//       id: 'Profile',
-//       title: 'Profile',
-//       type: 'item',
-//       url: '/profile',
-//       icon: icons.SchoolIcon
-//     },
-//     {
-//       id: 'TimeTable',
-//       title: 'TimeTable',
-//       type: 'item',
-//       url: '/timetable',
-//       icon: icons.SchoolIcon
-//     },
-    
-   
-   
-    
-//   ]
-// }
-const domains = sessionStorage.getItem("admin") ? admindomains :
-sessionStorage.getItem("super") ? admindomains :''
-// sessionStorage.getItem("employeeLoggedIn") ? teacherdomain :''
-export default domains;
+const Admindomains = sessionStorage.getItem('admin') ? admindomains : sessionStorage.getItem('super') ? admindomains : '';
+export default Admindomains;

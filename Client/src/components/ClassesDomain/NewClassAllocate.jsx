@@ -1,224 +1,208 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { 
-    Button, 
-    TextField, 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableContainer, 
-    TableHead, 
-    TableRow, 
-    Paper, 
-    Snackbar, 
-    Alert, 
-    IconButton, 
-    MenuItem, 
-    Select, 
-    InputLabel, 
-    FormControl 
+import {
+  Button,
+  TextField,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Snackbar,
+  Alert,
+  IconButton,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import config from '../../config'
+import config from '../../config';
 
 function ClassSectionAllocation() {
-    const [allocations, setAllocations] = useState([]);
-    const [classes, setClasses] = useState([]);
-    const [sections, setSections] = useState([]);
-    const [clsId, setClsId] = useState('');
-    const [secIds, setSecIds] = useState([]);
-    const [academicYear, setAcademicYear] = useState('');
-    const [editingAllocation, setEditingAllocation] = useState(null);
+  const [allocations, setAllocations] = useState([]);
+  const [classes, setClasses] = useState([]);
+  const [sections, setSections] = useState([]);
+  const [clsId, setClsId] = useState('');
+  const [secIds, setSecIds] = useState([]);
+  const [academicYear, setAcademicYear] = useState('');
+  const [editingAllocation, setEditingAllocation] = useState(null);
 
-    const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [snackbarMessage, setSnackbarMessage] = useState('');
-    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
-    useEffect(() => {
-        fetchAllocations();
-        fetchClasses();
-        fetchSections();
-    }, []);
+  useEffect(() => {
+    fetchAllocations();
+    fetchClasses();
+    fetchSections();
+  }, []);
 
-    const fetchAllocations = async () => {
-        try {
-            const response = await axios.get(`${config.apiURL}/clsAndSec/getClsAndSecAllocation`);
-            setAllocations(response.data);
-        } catch (err) {
-            console.error('Error fetching allocations:', err);
-        }
-    };
+  const fetchAllocations = async () => {
+    try {
+      const response = await axios.get(`${config.apiURL}/clsAndSec/getClsAndSecAllocation`);
+      setAllocations(response.data);
+    } catch (err) {
+      console.error('Error fetching allocations:', err);
+    }
+  };
 
-    const fetchClasses = async () => {
-        try {
-            const response = await axios.get(`${config.apiURL}/clsAndSec/getClass`);
-            setClasses(response.data);
-        } catch (err) {
-            console.error('Error fetching classes:', err);
-        }
-    };
+  const fetchClasses = async () => {
+    try {
+      const response = await axios.get(`${config.apiURL}/clsAndSec/getClass`);
+      setClasses(response.data);
+    } catch (err) {
+      console.error('Error fetching classes:', err);
+    }
+  };
 
-    const fetchSections = async () => {
-        try {
-            const response = await axios.get(`${config.apiURL}/clsAndSec/getSection`);
-            setSections(response.data);
-        } catch (err) {
-            console.error('Error fetching sections:', err);
-        }
-    };
+  const fetchSections = async () => {
+    try {
+      const response = await axios.get(`${config.apiURL}/clsAndSec/getSection`);
+      setSections(response.data);
+    } catch (err) {
+      console.error('Error fetching sections:', err);
+    }
+  };
 
-    const handleSave = async () => {
-        try {
-            const payload = { cls_id: clsId, sec_ids: secIds, academic_year: academicYear };
-    
-            if (editingAllocation) {
-                // Update existing allocation
-                await axios.put(`${config.apiURL}/clsAndSec/updateClassAndSecAllocation/${editingAllocation.cls_allocation_id}`, payload);
-                setSnackbarMessage('Allocation updated successfully');
-            } else {
-                // Create new allocation
-                await axios.post(`${config.apiURL}/clsAndSec/saveClassAndSecAllocation`, payload);
-                setSnackbarMessage('Allocation created successfully');
-            }
-    
-            setSnackbarSeverity('success');
-            setSnackbarOpen(true);
-            fetchAllocations();
-            resetForm();
-        } catch (err) {
-            console.error('Error saving allocation:', err);
-            setSnackbarMessage('Failed to save allocation');
-            setSnackbarSeverity('error');
-            setSnackbarOpen(true);
-        }
-    };
-    
+  const handleSave = async () => {
+    try {
+      const payload = { cls_id: clsId, sec_ids: secIds, academic_year: academicYear };
 
-    const handleDelete = async (clsAllocationId) => {
-        try {
-            await axios.delete(`${config.apiURL}/clsAndSec/deleteClassAndSecAllocation/${clsAllocationId}`);
-            setSnackbarMessage('Allocation deleted successfully');
-            setSnackbarSeverity('success');
-            setSnackbarOpen(true);
-            fetchAllocations();
-        } catch (err) {
-            console.error('Error deleting allocation:', err);
-            setSnackbarMessage('Failed to delete allocation');
-            setSnackbarSeverity('error');
-            setSnackbarOpen(true);
-        }
-    };
+      if (editingAllocation) {
+        // Update existing allocation
+        await axios.put(`${config.apiURL}/clsAndSec/updateClassAndSecAllocation/${editingAllocation.cls_allocation_id}`, payload);
+        setSnackbarMessage('Allocation updated successfully');
+      } else {
+        // Create new allocation
+        await axios.post(`${config.apiURL}/clsAndSec/saveClassAndSecAllocation`, payload);
+        setSnackbarMessage('Allocation created successfully');
+      }
 
-    const resetForm = () => {
-        setClsId('');
-        setSecIds([]);
-        setAcademicYear('');
-        setEditingAllocation(null);
-    };
+      setSnackbarSeverity('success');
+      setSnackbarOpen(true);
+      fetchAllocations();
+      resetForm();
+    } catch (err) {
+      console.error('Error saving allocation:', err);
+      setSnackbarMessage('Failed to save allocation');
+      setSnackbarSeverity('error');
+      setSnackbarOpen(true);
+    }
+  };
 
-    const handleSnackbarClose = () => {
-        setSnackbarOpen(false);
-    };
+  const handleDelete = async (clsAllocationId) => {
+    try {
+      await axios.delete(`${config.apiURL}/clsAndSec/deleteClassAndSecAllocation/${clsAllocationId}`);
+      setSnackbarMessage('Allocation deleted successfully');
+      setSnackbarSeverity('success');
+      setSnackbarOpen(true);
+      fetchAllocations();
+    } catch (err) {
+      console.error('Error deleting allocation:', err);
+      setSnackbarMessage('Failed to delete allocation');
+      setSnackbarSeverity('error');
+      setSnackbarOpen(true);
+    }
+  };
 
-    const handleEdit = (allocation) => {
-        setClsId(allocation.cls_id);
-        setSecIds([allocation.sec_id]);  // This assumes you're only editing one section at a time
-        setAcademicYear(allocation.academic_year);
-        setEditingAllocation(allocation);
-    };
-    
+  const resetForm = () => {
+    setClsId('');
+    setSecIds([]);
+    setAcademicYear('');
+    setEditingAllocation(null);
+  };
 
-    return (
-        <div>
-            <h2>Class and Section Allocation</h2>
-            <form noValidate autoComplete="off">
-                <FormControl fullWidth margin="normal">
-                    <InputLabel>Class</InputLabel>
-                    <Select
-                        value={clsId}
-                        onChange={(e) => setClsId(e.target.value)}
-                    >
-                        {classes.map((cls) => (
-                            <MenuItem key={cls.cls_id} value={cls.cls_id}>
-                                {cls.cls_name}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
-                <FormControl fullWidth margin="normal">
-                    <InputLabel>Sections</InputLabel>
-                    <Select
-                        multiple
-                        value={secIds}
-                        onChange={(e) => setSecIds(e.target.value)}
-                        renderValue={(selected) => selected.join(', ')}
-                    >
-                        {sections.map((sec) => (
-                            <MenuItem key={sec.sec_id} value={sec.sec_id}>
-                                {sec.sec_name}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+  const handleEdit = (allocation) => {
+    setClsId(allocation.cls_id);
+    setSecIds([allocation.sec_id]); // This assumes you're only editing one section at a time
+    setAcademicYear(allocation.academic_year);
+    setEditingAllocation(allocation);
+  };
 
-                <TextField
-                    label="Academic Year"
-                    value={academicYear}
-                    onChange={(e) => setAcademicYear(e.target.value)}
-                    fullWidth
-                    margin="normal"
-                />
-                <Button variant="contained" color="primary" onClick={handleSave}>
-                    {editingAllocation ? 'Update Allocation' : 'Save Allocation'}
-                </Button>
-            </form>
+  return (
+    <div>
+      <h2>Class and Section Allocation</h2>
+      <form noValidate autoComplete="off">
+        <FormControl fullWidth margin="normal">
+          <InputLabel>Class</InputLabel>
+          <Select value={clsId} onChange={(e) => setClsId(e.target.value)}>
+            {classes.map((cls) => (
+              <MenuItem key={cls.cls_id} value={cls.cls_id}>
+                {cls.cls_name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-            <h3>Allocations</h3>
-            <TableContainer component={Paper}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Class Name</TableCell>
-                            <TableCell>Section Names</TableCell>
-                            <TableCell>Academic Year</TableCell>
-                            <TableCell>Actions</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {allocations.map((allocation) => (
-                            <TableRow key={allocation.cls_allocation_id}>
-                                <TableCell>{allocation.cls_name}</TableCell>
-                                <TableCell>{allocation.sec_name}</TableCell>
-                                <TableCell>{allocation.academic_year}</TableCell>
-                                <TableCell>
-                                    <IconButton onClick={() => handleEdit(allocation)}>
-                                        <EditIcon />
-                                    </IconButton>
-                                    <IconButton onClick={() => handleDelete(allocation.cls_allocation_id)}>
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+        <FormControl fullWidth margin="normal">
+          <InputLabel>Sections</InputLabel>
+          <Select multiple value={secIds} onChange={(e) => setSecIds(e.target.value)} renderValue={(selected) => selected.join(', ')}>
+            {sections.map((sec) => (
+              <MenuItem key={sec.sec_id} value={sec.sec_id}>
+                {sec.sec_name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-            {/* Snackbar for success and error messages */}
-            <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={6000}
-                onClose={handleSnackbarClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            >
-                <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
-                    {snackbarMessage}
-                </Alert>
-            </Snackbar>
-        </div>
-    );
+        <TextField label="Academic Year" value={academicYear} onChange={(e) => setAcademicYear(e.target.value)} fullWidth margin="normal" />
+        <Button variant="contained" color="primary" onClick={handleSave}>
+          {editingAllocation ? 'Update Allocation' : 'Save Allocation'}
+        </Button>
+      </form>
+
+      <h3>Allocations</h3>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Class Name</TableCell>
+              <TableCell>Section Names</TableCell>
+              <TableCell>Academic Year</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {allocations.map((allocation) => (
+              <TableRow key={allocation.cls_allocation_id}>
+                <TableCell>{allocation.cls_name}</TableCell>
+                <TableCell>{allocation.sec_name}</TableCell>
+                <TableCell>{allocation.academic_year}</TableCell>
+                <TableCell>
+                  <IconButton onClick={() => handleEdit(allocation)}>
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton onClick={() => handleDelete(allocation.cls_allocation_id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      {/* Snackbar for success and error messages */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+    </div>
+  );
 }
 
 export default ClassSectionAllocation;

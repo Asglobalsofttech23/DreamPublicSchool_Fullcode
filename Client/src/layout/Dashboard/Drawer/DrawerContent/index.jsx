@@ -1,5 +1,3 @@
-// project import
-import NavCard from './NavCard';
 import Navigation from './Navigation';
 import SimpleBar from 'components/third-party/SimpleBar';
 
@@ -8,11 +6,17 @@ import SimpleBar from 'components/third-party/SimpleBar';
 export default function DrawerContent() {
   return (
     <>
-      <SimpleBar sx={{ '& .simplebar-content': { display: 'flex', flexDirection: 'column' } }}>
-        <Navigation />
-        <NavCard />
-      </SimpleBar>
+  <SimpleBar sx={{
+  height: '110vh', // Takes up 80% of the viewport height
+  '& .simplebar-content': { 
+    display: 'flex', 
+    flexDirection: 'column' 
+  }
+}}>
+  <Navigation />
+</SimpleBar>
+
+
     </>
   );
 }
-

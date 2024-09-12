@@ -22,8 +22,6 @@ import Students from 'components/EmployeField/Students';
 import FeesAllocmanu from 'components/Feesmanagement/FeesAllocmanu';
 import Allfeesalloc from 'components/Feesmanagement/Allfeesalloc';
 import Feesallocstudent from 'components/Feesmanagement/Feesallocstudent';
-import Feespage from 'components/Feesmanagement/Feespage';
-import Payfees from 'components/Feesmanagement/Payfees';
 import Detailattenance from 'components/EmployeField/Detailattenance';
 import Markallocation from 'components/EmployeField/Markallocation';
 import Exams from 'components/EmployeField/Exams';
@@ -71,7 +69,8 @@ const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
 const SuperDashboardDefault = Loadable(lazy(() => import('pages/superAdminDashboard/index')));
 const EmployeDash = Loadable(lazy(() => import('pages/empdashboard/index')));
-
+const Payfees = Loadable(lazy(() => import('components/Feesmanagement/Payfees')));
+const StudentFeespage = Loadable(lazy(() => import('components/Feesmanagement/StudentFeespage')));
 
 const superadminRoutes = {
   path: '/',
@@ -82,192 +81,191 @@ const superadminRoutes = {
       element: <SuperDashboardDefault />
     },
     {
-      path:'Booking',
-      element:<StudentBookingApplication/>,
+      path: 'Booking',
+      element: <StudentBookingApplication />
     },
     {
-      path:'StudentsBooking',
-      element:<AllBookingStudents/>,
+      path: 'StudentsBooking',
+      element: <AllBookingStudents />
     },
     {
       path: 'newAdmission',
-      element: <EnquiryStudents />,
+      element: <EnquiryStudents />
     },
     {
-      path:'StudentsAdmisson',
-      element:<StudentAdmissionApplication/>,
+      path: 'StudentsAdmisson',
+      element: <StudentAdmissionApplication />
     },
     {
       path: 'allstudentlist',
-      element: <AllStudents />,
+      element: <AllStudents />
     },
     {
       path: 'addStudent',
-      element: <StudentApplication />,
+      element: <StudentApplication />
     },
     {
       path: 'uploadExcel',
-      element: <UploadExcel />,
+      element: <UploadExcel />
     },
     {
       path: 'sibStu',
-      element: <SiblingStudentsIndex />,
+      element: <SiblingStudentsIndex />
     },
     {
       path: 'feePendingStu',
-      element: <FeesPendingStudentsIndex />,
+      element: <FeesPendingStudentsIndex />
     },
     {
       path: 'discount',
-      element: <DiscountIndex />,
+      element: <DiscountIndex />
     },
     {
       path: 'singleFeesDiscountIndex/:fees_id',
-      element: <SingleFeeDiscountIndex />,
+      element: <SingleFeeDiscountIndex />
     },
- 
-  
+
     {
       path: 'studentalloc/:cls_id',
-      element: <StudentAllocation />,
+      element: <StudentAllocation />
     },
     {
-      path: 'feespage/:cls_id',
-      element: <Feespage/>,
+      path: '/feespage/:cls_id',
+      element: <StudentFeespage />
     },
     {
       path: 'addStaff',
-      element: <StaffApplication />,
+      element: <StaffApplication />
     },
     {
       path: 'allstaffs',
-      element: <Allstaffs />,
+      element: <Allstaffs />
     },
     {
       path: 'addStaffAllocation',
-      element: <AddStaffAllocation />,
+      element: <AddStaffAllocation />
     },
     {
       path: 'staffAllocationIndex',
-      element: <StaffAllocationIndex />,
+      element: <StaffAllocationIndex />
     },
     {
       path: 'department',
-      element: <DepartmentAlloc />,
+      element: <DepartmentAlloc />
     },
     {
       path: 'feesslip/:stu_id',
-      element: <Feesslip/>,
+      element: <Feesslip />
     },
     {
       path: 'editalloc',
-      element: <EditAlloc />,
+      element: <EditAlloc />
     },
     {
       path: 'addDept',
-      element: <AddDepartment />,
+      element: <AddDepartment />
     },
     {
       path: 'feesallocationmanu',
-      element: <FeesAllocmanu />,
+      element: <FeesAllocmanu />
     },
     {
       path: 'payfees/:stu_id',
-      element: <Payfees/>,
+      element: <Payfees />
     },
 
     {
       path: 'ecapayfees/:stu_id',
-      element: <EcaFeeCollectionForm/>,
+      element: <EcaFeeCollectionForm />
     },
     {
       path: 'vanpayfees/:stu_id',
-      element: <VanFeeCollectionForm/>,
+      element: <VanFeeCollectionForm />
     },
     {
       path: 'schemepayfees/:stu_id',
-      element: <SchemeFeeCollectionForm/>,
+      element: <SchemeFeeCollectionForm />
     },
     {
       path: 'feesstudent',
-      element: <Feesallocstudent />,
+      element: <Feesallocstudent />
     },
     {
       path: 'feescomponents',
-      element: <Allfeesalloc />,
+      element: <Allfeesalloc />
     },
     {
       path: 'allocation',
-      element: <Allocation />,
+      element: <Allocation />
     },
     {
       path: 'feespay',
-      element: <Feespay />,
+      element: <Feespay />
     },
     {
       path: 'allFeesLogIndex',
-      element: <AllFeesLogIndex />,
+      element: <AllFeesLogIndex />
     },
-   
+
     {
       path: 'payfeeslog',
-      element: <PayFeesLog />,
+      element: <PayFeesLog />
     },
     {
       path: 'feeLogsByFeeId/:fees_id',
-      element: <FeesLogsIndex />,
+      element: <FeesLogsIndex />
     },
     {
       path: 'invoice/:feeslogid',
-      element: <Invoice/>,
+      element: <Invoice />
     },
     {
       path: 'ecainvoice/:feeslogid',
-      element: <EcaInvoice/>,
+      element: <EcaInvoice />
     },
     {
       path: 'vaninvoice/:feeslogid',
-      element: <VanInvoice/>,
+      element: <VanInvoice />
     },
     {
       path: 'schemeinvoice/:feeslogid',
-      element: <SchemeInvoice/>,
+      element: <SchemeInvoice />
     },
     {
       path: 'feesapplication',
-      element: <FeesApplication />,
+      element: <FeesApplication />
     },
     {
       path: 'classteach',
-      element: <ClassTeach />,
+      element: <ClassTeach />
     },
     {
       path: 'Studattenance',
-      element: <Studentsattenance />,
+      element: <Studentsattenance />
     },
     {
       path: 'allclass',
-      element: <ClassList/>,
+      element: <ClassList />
     },
     {
       path: 'classAllocation',
-      element: <ClassSectionAllocation/>,
+      element: <ClassSectionAllocation />
     },
     {
       path: 'viewStudents/:classId',
-      element: <ViewStudents/>,
+      element: <ViewStudents />
     },
     {
       path: 'vanfees',
-      element: <VanStudent/>,
+      element: <VanStudent />
     },
     {
       path: 'ecafees',
-      element: <EcaStudent/>,
+      element: <EcaStudent />
     },
     {
       path: 'schemefees',
-      element: <SchemeStudent/>,
+      element: <SchemeStudent />
     },
     {
       path: 'dashboard',
@@ -297,187 +295,186 @@ const adminRoutes = {
       element: <DashboardDefault />
     },
     {
-      path:'Booking',
-      element:<StudentBookingApplication/>,
+      path: 'Booking',
+      element: <StudentBookingApplication />
     },
     {
-      path:'StudentsBooking',
-      element:<AllBookingStudents/>,
+      path: 'StudentsBooking',
+      element: <AllBookingStudents />
     },
     {
       path: 'newAdmission',
-      element: <EnquiryStudents />,
+      element: <EnquiryStudents />
     },
     {
-      path:'StudentsAdmisson',
-      element:<StudentAdmissionApplication/>,
+      path: 'StudentsAdmisson',
+      element: <StudentAdmissionApplication />
     },
     {
       path: 'allstudentlist',
-      element: <AllStudents />,
+      element: <AllStudents />
     },
     {
       path: 'addStudent',
-      element: <StudentApplication />,
+      element: <StudentApplication />
     },
     {
       path: 'uploadExcel',
-      element: <UploadExcel />,
+      element: <UploadExcel />
     },
     {
       path: 'sibStu',
-      element: <SiblingStudentsIndex />,
+      element: <SiblingStudentsIndex />
     },
     {
       path: 'feePendingStu',
-      element: <FeesPendingStudentsIndex />,
+      element: <FeesPendingStudentsIndex />
     },
     {
       path: 'discount',
-      element: <DiscountIndex />,
+      element: <DiscountIndex />
     },
     {
       path: 'singleFeesDiscountIndex/:fees_id',
-      element: <SingleFeeDiscountIndex />,
+      element: <SingleFeeDiscountIndex />
     },
- 
-  
+
     {
       path: 'studentalloc/:cls_id',
-      element: <StudentAllocation />,
+      element: <StudentAllocation />
     },
     {
-      path: 'feespage/:cls_id',
-      element: <Feespage/>,
+      path: '/feespage/:cls_id',
+      element: <StudentFeespage />
     },
     {
       path: 'addStaff',
-      element: <StaffApplication />,
+      element: <StaffApplication />
     },
     {
       path: 'allstaffs',
-      element: <Allstaffs />,
+      element: <Allstaffs />
     },
     {
       path: 'addStaffAllocation',
-      element: <AddStaffAllocation />,
+      element: <AddStaffAllocation />
     },
     {
       path: 'staffAllocationIndex',
-      element: <StaffAllocationIndex />,
+      element: <StaffAllocationIndex />
     },
     {
       path: 'department',
-      element: <DepartmentAlloc />,
+      element: <DepartmentAlloc />
     },
     {
       path: 'feesslip/:stu_id',
-      element: <Feesslip/>,
+      element: <Feesslip />
     },
     {
       path: 'editalloc',
-      element: <EditAlloc />,
+      element: <EditAlloc />
     },
     {
       path: 'addDept',
-      element: <AddDepartment />,
+      element: <AddDepartment />
     },
     {
       path: 'feesallocationmanu',
-      element: <FeesAllocmanu />,
+      element: <FeesAllocmanu />
     },
     {
-      path: 'payfees/:stu_id',
-      element: <Payfees/>,
+      path: '/payfees/:stu_id',
+      element: <Payfees />
     },
     {
       path: 'ecapayfees/:stu_id',
-      element: <EcaFeeCollectionForm/>,
+      element: <EcaFeeCollectionForm />
     },
     {
       path: 'vanpayfees/:stu_id',
-      element: <VanFeeCollectionForm/>,
+      element: <VanFeeCollectionForm />
     },
     {
       path: 'schemepayfees/:stu_id',
-      element: <SchemeFeeCollectionForm/>,
+      element: <SchemeFeeCollectionForm />
     },
     {
       path: 'feesstudent',
-      element: <Feesallocstudent />,
+      element: <Feesallocstudent />
     },
     {
       path: 'feescomponents',
-      element: <Allfeesalloc />,
+      element: <Allfeesalloc />
     },
     {
       path: 'allocation',
-      element: <Allocation />,
+      element: <Allocation />
     },
     {
       path: 'feespay',
-      element: <Feespay />,
+      element: <Feespay />
     },
     {
       path: 'allFeesLogIndex',
-      element: <AllFeesLogIndex />,
+      element: <AllFeesLogIndex />
     },
-   
+
     {
       path: 'payfeeslog',
-      element: <PayFeesLog />,
+      element: <PayFeesLog />
     },
     {
       path: 'feeLogsByFeeId/:fees_id',
-      element: <FeesLogsIndex />,
+      element: <FeesLogsIndex />
     },
     {
       path: 'invoice/:feeslogid',
-      element: <Invoice/>,
+      element: <Invoice />
     },
     {
       path: 'ecainvoice/:feeslogid',
-      element: <EcaInvoice/>,
+      element: <EcaInvoice />
     },
     {
       path: 'vaninvoice/:feeslogid',
-      element: <VanInvoice/>,
+      element: <VanInvoice />
     },
     {
       path: 'feesapplication',
-      element: <FeesApplication />,
+      element: <FeesApplication />
     },
     {
       path: 'classteach',
-      element: <ClassTeach />,
+      element: <ClassTeach />
     },
     {
       path: 'Studattenance',
-      element: <Studentsattenance />,
+      element: <Studentsattenance />
     },
     {
       path: 'allclass',
-      element: <ClassList/>,
+      element: <ClassList />
     },
     {
       path: 'classAllocation',
-      element: <ClassSectionAllocation/>,
+      element: <ClassSectionAllocation />
     },
     {
       path: 'viewStudents/:classId',
-      element: <ViewStudents/>,
+      element: <ViewStudents />
     },
     {
       path: 'vanfees',
-      element: <VanStudent/>,
+      element: <VanStudent />
     },
     {
       path: 'ecafees',
-      element: <EcaStudent/>,
+      element: <EcaStudent />
     },
     {
       path: 'schemefees',
-      element: <SchemeStudent/>,
+      element: <SchemeStudent />
     },
     {
       path: 'dashboard',
@@ -501,21 +498,21 @@ const adminRoutes = {
 
 const employeeRoutes = {
   path: '/',
-  element: <Dashboard/>,
+  element: <Dashboard />,
   children: [
     {
       path: 'dashboard',
       children: [
         {
           path: 'default',
-          element: <EmployeDash/>
+          element: <EmployeDash />
         }
       ]
     },
-   
+
     {
       path: '/',
-      element: <EmployeDash/>
+      element: <EmployeDash />
     },
     // {
     //   path: '/mystudents',
@@ -524,60 +521,62 @@ const employeeRoutes = {
 
     {
       path: '/classstudents',
-      element: <Classstudents/>
+      element: <Classstudents />
     },
     {
       path: '/attendance',
-      element: <Students/>
+      element: <Students />
     },
     {
       path: '/markallocstud',
-      element: <Markallocation/>
+      element: <Markallocation />
     },
     {
       path: '/stafffeesdetail/:staff_id',
-      element: <Staffdetail/>
+      element: <Staffdetail />
     },
     {
       path: '/profile',
-      element: <Staffattenance/>
+      element: <Staffattenance />
     },
     {
       path: '/exams',
-      element: <Exams/>
+      element: <Exams />
     },
     {
       path: '/vanattenance/:staff_id',
-      element: <Vanattenance/>
+      element: <Vanattenance />
     },
-   
+
     {
       path: '/vanattenancedetails/:staff_id',
-      element: <Vanattenancedetails/>
+      element: <Vanattenancedetails />
     },
     {
       path: 'timeTable',
-      element: <TimeTableIndex />,
+      element: <TimeTableIndex />
     },
     {
       path: 'addtimetable',
-      element: <Timetable/>,
+      element: <Timetable />
     },
-    
-      
+
     {
       path: '/attenancedetails/:staff_id',
-      element: <Detailattenance/>
-    },
-    
+      element: <Detailattenance />
+    }
   ]
 };
 
-const MainRoutes = ( sessionStorage.getItem("super") ? superadminRoutes :
-  (sessionStorage.getItem("admin") ? adminRoutes :
-  (sessionStorage.getItem("employeeLoggedIn") ? employeeRoutes : {
-    path: '/',
-    element: <Login />
-  })));
+const MainRoutes = sessionStorage.getItem('super')
+  ? superadminRoutes
+  : sessionStorage.getItem('admin')
+    ? adminRoutes
+    : sessionStorage.getItem('employeeLoggedIn')
+      ? employeeRoutes
+      : {
+          path: '/',
+          element: <Login />
+        };
 
 export default MainRoutes;

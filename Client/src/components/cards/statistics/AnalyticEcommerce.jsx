@@ -26,7 +26,7 @@ export default function AnalyticEcommerce({ color = 'primary', title, count, per
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
-    console.log("year",selectedYear)
+    console.log('year', selectedYear);
     // You can perform any additional actions here, like fetching data for the selected year
   };
 
@@ -58,13 +58,7 @@ export default function AnalyticEcommerce({ color = 'primary', title, count, per
             <Grid item sx={{ ml: 1.25 }}>
               <FormControl sx={{ minWidth: 120 }}>
                 <InputLabel id="year-select-label">Year</InputLabel>
-                <Select
-                  labelId="year-select-label"
-                  id="year-select"
-                  value={selectedYear}
-                  onChange={handleYearChange}
-                  size="small"
-                >
+                <Select labelId="year-select-label" id="year-select" value={selectedYear} onChange={handleYearChange} size="small">
                   <MenuItem value={'2023-2024'}>2023-2024</MenuItem>
                   <MenuItem value={'2024-2025'}>2024-2025</MenuItem>
                   <MenuItem value={'2025-2026'}>2025-2026</MenuItem>
@@ -74,7 +68,7 @@ export default function AnalyticEcommerce({ color = 'primary', title, count, per
           )}
         </Grid>
       </Stack>
-         </MainCard>
+    </MainCard>
   );
 }
 

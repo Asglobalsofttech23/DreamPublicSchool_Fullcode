@@ -40,7 +40,5 @@ const superdashboard = {
   ]
 };
 
-
-const dashboards = sessionStorage.getItem("admin") ? dashboard :
-sessionStorage.getItem("super") ? superdashboard :''
-export default dashboards;
+const dashboards = sessionStorage.getItem('admin') ? dashboard : sessionStorage.getItem('super') ? superdashboard : '';
+export default superdashboard;

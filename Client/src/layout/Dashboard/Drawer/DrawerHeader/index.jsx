@@ -6,7 +6,6 @@ import { useTheme } from '@mui/material/styles';
 // project import
 import DrawerHeaderStyled from './DrawerHeaderStyled';
 import Logo from 'components/logo';
-import { filter } from 'lodash';
 
 // ==============================|| DRAWER HEADER ||============================== //
 
@@ -15,7 +14,7 @@ export default function DrawerHeader({ open }) {
 
   return (
     <DrawerHeaderStyled theme={theme} open={!!open}>
-      <Logo isIcon={!open} sx={{ width: open ? 'auto' : 55, height: 95, }}/>
+      <Logo isIcon={!open} sx={{ width: open ? 'auto' : 35, height: 95 }} />
     </DrawerHeaderStyled>
   );
 }

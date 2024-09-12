@@ -7,7 +7,7 @@ import {
   FontSizeOutlined,
   LoadingOutlined
 } from '@ant-design/icons';
-import { FaTableCells } from "react-icons/fa6";
+import { FaTableCells } from 'react-icons/fa6';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 // icons
@@ -28,8 +28,7 @@ const icons = {
 const utilities = {
   id: 'utilities',
   title: 'Utilities',
-  type: 'fields',
- 
+  type: 'fields'
 };
 
 export default utilities;

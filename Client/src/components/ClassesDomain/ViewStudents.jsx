@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -17,17 +16,17 @@ const formatDate = (dateString) => {
 const Root = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3),
   backgroundColor: theme.palette.background.default,
-  minHeight: '100vh',
+  minHeight: '100vh'
 }));
 
 const Header = styled(Box)(({ theme }) => ({
-  marginBottom: theme.spacing(4),
+  marginBottom: theme.spacing(4)
 }));
 
 const SearchField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   backgroundColor: theme.palette.background.paper,
-  borderRadius: theme.shape.borderRadius,
+  borderRadius: theme.shape.borderRadius
 }));
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -35,8 +34,8 @@ const StyledCard = styled(Card)(({ theme }) => ({
   transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
   '&:hover': {
     transform: 'scale(1.05)',
-    boxShadow: theme.shadows[6],
-  },
+    boxShadow: theme.shadows[6]
+  }
 }));
 
 const CardContentCentered = styled(CardContent)(({ theme }) => ({
@@ -44,19 +43,19 @@ const CardContentCentered = styled(CardContent)(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   textAlign: 'center',
-  padding: theme.spacing(2),
+  padding: theme.spacing(2)
 }));
 
 const StudentName = styled(Typography)(({ theme }) => ({
   fontSize: '1.25rem',
   fontWeight: 'bold',
   color: theme.palette.text.primary,
-  marginBottom: theme.spacing(1),
+  marginBottom: theme.spacing(1)
 }));
 
 const StudentInfo = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
-  marginBottom: theme.spacing(0.5),
+  marginBottom: theme.spacing(0.5)
 }));
 
 function ViewStudents() {
@@ -67,33 +66,33 @@ function ViewStudents() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    axios.get(`${config.apiURL}/students/${classId}`)
+    axios
+      .get(`${config.apiURL}/students/${classId}`)
       .then((res) => {
         setStudents(res.data);
         setFilteredStudents(res.data);
       })
       .catch((err) => {
-        console.log("Error fetching students:", err);
+        console.log('Error fetching students:', err);
       });
-    
-    axios.get(`${config.apiURL}/clsAndSec/getClass/${classId}`)
+
+    axios
+      .get(`${config.apiURL}/clsAndSec/getClass/${classId}`)
       .then((res) => {
-        console.log("Class data response:", res.data); // Log the entire response
+        console.log('Class data response:', res.data); // Log the entire response
         if (res.data && res.data.length > 0) {
           setClassName(res.data[0].cls_name); // Access the first element of the array
         } else {
-          console.log("cls_name not found in the response");
+          console.log('cls_name not found in the response');
         }
       })
       .catch((err) => {
-        console.log("Error fetching class name:", err);
+        console.log('Error fetching class name:', err);
       });
   }, [classId]);
 
   useEffect(() => {
-    const results = students.filter(student =>
-      student.stu_name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const results = students.filter((student) => student.stu_name.toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredStudents(results);
   }, [searchTerm, students]);
 
@@ -116,24 +115,12 @@ function ViewStudents() {
           <Grid item xs={12} sm={6} md={4} key={student.stu_id}>
             <StyledCard>
               <CardContentCentered>
-                <StudentName>
-                  {student.stu_name}
-                </StudentName>
-                <StudentInfo>
-                  Father Name : {student.father_name}
-                </StudentInfo>
-                <StudentInfo>
-                  Father Mobile : {student.father_mobile}
-                </StudentInfo>
-                <StudentInfo>
-                  Gender: {student.gender}
-                </StudentInfo>
-                <StudentInfo>
-                  Section: {student.section}
-                </StudentInfo>
-                <StudentInfo>
-                  DOB: {formatDate(student.dob)}
-                </StudentInfo>
+                <StudentName>{student.stu_name}</StudentName>
+                <StudentInfo>Father Name : {student.father_name}</StudentInfo>
+                <StudentInfo>Father Mobile : {student.father_mobile}</StudentInfo>
+                <StudentInfo>Gender: {student.gender}</StudentInfo>
+                <StudentInfo>Section: {student.section}</StudentInfo>
+                <StudentInfo>DOB: {formatDate(student.dob)}</StudentInfo>
                 {/* Add more fields as needed */}
               </CardContentCentered>
             </StyledCard>

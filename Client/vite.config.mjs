@@ -9,7 +9,7 @@ import jsconfigPaths from 'vite-jsconfig-paths';
 export default defineConfig({
   plugins: [react(), jsconfigPaths()],
   // https://github.com/jpuri/react-draft-wysiwyg/issues/1317
-  base: './', // accessing env variable is not possible here. So hard coding this.
+  base: '/', // accessing env variable is not possible here. So hard coding this.
   define: {
     global: 'window'
   },
@@ -27,8 +27,8 @@ export default defineConfig({
   },
   server: {
     // this ensures that the browser opens upon server start
-    host : '0.0.0.0',
     open: true,
+    // this sets a default port to 3000
     port: 3000
   },
   preview: {

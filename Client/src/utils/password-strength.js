@@ -1,5 +1,5 @@
 /**
- * Password validator for  pages
+ * Password validator for login pages
  */
 
 // has number

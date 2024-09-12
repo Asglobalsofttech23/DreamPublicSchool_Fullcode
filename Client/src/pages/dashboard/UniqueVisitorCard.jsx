@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 
 // material-ui
@@ -21,9 +20,7 @@ export default function UniqueVisitorCard() {
         <Grid item>
           <Typography variant="h3">Students Details:</Typography>
         </Grid>
-        <Grid item>
-          {/* Add any additional controls here if needed */}
-        </Grid>
+        <Grid item>{/* Add any additional controls here if needed */}</Grid>
       </Grid>
       <MainCard content={false} sx={{ mt: 1.5 }}>
         <Box sx={{ pt: 1, pr: 2 }}>

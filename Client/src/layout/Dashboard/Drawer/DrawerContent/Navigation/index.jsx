@@ -9,18 +9,21 @@ import menuItem from 'menu-items';
 // ==============================|| DRAWER CONTENT - NAVIGATION ||============================== //
 
 export default function Navigation() {
-  const navGroups = menuItem.items.map((item) => {
+  const navGroups = menuItem.items.map((item, index) => {
+    // Create a unique key by combining id with index
+    const key = item.id ? `${item.id}-${index}` : index;
+
     switch (item.type) {
       case 'group':
-        return <NavGroup key={item.id} item={item} />;
+        return <NavGroup key={key} item={item} />;
       default:
         return (
-          <Typography key={item.id} variant="h6" color="error" align="center">
-          
+          <Typography key={key} variant="h6" color="error" align="center">
+            Fix - Navigation Group
           </Typography>
         );
     }
   });
 
-  return <Box sx={{ pt: 2,marginTop:'40px',position:'static' }}>{navGroups}</Box>;
+  return <Box sx={{ pt: 2 }}>{navGroups}</Box>;
 }

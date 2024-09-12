@@ -1,5 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Select, MenuItem, FormControl, InputLabel, CircularProgress, IconButton, Dialog, DialogActions, DialogContent } from '@mui/material';
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  CircularProgress,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent
+} from '@mui/material';
 import { Edit, Delete, Print } from '@mui/icons-material';
 import axios from 'axios';
 import config from '../../config'; // Ensure you have the correct path to your config file
@@ -25,12 +44,10 @@ const SchemeStudent = () => {
   useEffect(() => {
     let filtered = [...students];
     if (selectedClass) {
-      filtered = filtered.filter(student => student.cls_id == selectedClass);
+      filtered = filtered.filter((student) => student.cls_id == selectedClass);
     }
     if (searchTerm) {
-      filtered = filtered.filter(student =>
-        student.stu_name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      filtered = filtered.filter((student) => student.stu_name.toLowerCase().includes(searchTerm.toLowerCase()));
     }
     setFilteredStudents(filtered);
   }, [selectedClass, searchTerm, students]);
@@ -42,7 +59,7 @@ const SchemeStudent = () => {
       setStudents(response.data);
       setFilteredStudents(response.data);
     } catch (err) {
-      console.log("Error fetching students:", err);
+      console.log('Error fetching students:', err);
     } finally {
       setLoading(false);
     }
@@ -53,7 +70,7 @@ const SchemeStudent = () => {
       const response = await axios.get(`${config.apiURL}/clsAndSec/getClass`);
       setClsData(response.data);
     } catch (err) {
-      console.log("Error fetching classes:", err);
+      console.log('Error fetching classes:', err);
     }
   };
 
@@ -80,7 +97,7 @@ const SchemeStudent = () => {
       await axios.put(`${config.apiURL}/Schemestudents/${studentId}`);
       fetchStudents();
     } catch (err) {
-      console.log("Error deleting student:", err);
+      console.log('Error deleting student:', err);
     }
   };
 
@@ -88,7 +105,9 @@ const SchemeStudent = () => {
     const printContent = tableRef.current.innerHTML;
     const printWindow = window.open('', '', 'width=800,height=600');
     printWindow.document.write('<html><head><title>Print</title>');
-    printWindow.document.write('<style>table { width: 100%; border-collapse: collapse; } table, th, td { border: 1px solid black; } th, td { padding: 8px; text-align: left; } .no-print { display: none; } @media print { .no-print { display: none; } }</style>');
+    printWindow.document.write(
+      '<style>table { width: 100%; border-collapse: collapse; } table, th, td { border: 1px solid black; } th, td { padding: 8px; text-align: left; } .no-print { display: none; } @media print { .no-print { display: none; } }</style>'
+    );
     printWindow.document.write('</head><body>');
     printWindow.document.write(printContent);
     printWindow.document.write('</body></html>');
@@ -97,7 +116,7 @@ const SchemeStudent = () => {
   };
 
   const getClassName = (classId) => {
-    const classData = clsData.find(cls => cls.cls_id == classId);
+    const classData = clsData.find((cls) => cls.cls_id == classId);
     return classData ? classData.cls_name : 'N/A';
   };
 
@@ -108,35 +127,24 @@ const SchemeStudent = () => {
 
   return (
     <div>
-      <Button variant="contained" color="primary"
-       style={{ marginBottom: 16, marginLeft: 16 }} onClick={handleAddStudent}>
+      <Button variant="contained" color="primary" style={{ marginBottom: 16, marginLeft: 16 }} onClick={handleAddStudent}>
         Add Student
       </Button>
-      <FormControl variant="outlined" style={{ minWidth: 120,marginLeft:20, marginRight: 16 }}>
+      <FormControl variant="outlined" style={{ minWidth: 120, marginLeft: 20, marginRight: 16 }}>
         <InputLabel>Class</InputLabel>
-        <Select
-          value={selectedClass}
-          onChange={handleClassChange}
-          label="Class"
-        >
-          <MenuItem value=""><em>All Classes</em></MenuItem>
+        <Select value={selectedClass} onChange={handleClassChange} label="Class">
+          <MenuItem value="">
+            <em>All Classes</em>
+          </MenuItem>
           {clsData.map((cls) => (
-            <MenuItem key={cls.cls_id} value={cls.cls_id}>{cls.cls_name}</MenuItem>
+            <MenuItem key={cls.cls_id} value={cls.cls_id}>
+              {cls.cls_name}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>
-      <TextField
-        variant="outlined"
-        label="Search by Name"
-        onChange={handleSearchChange}
-        style={{ marginBottom: 16 }}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handlePrint}
-        style={{ marginBottom: 16, marginLeft: 16 }}
-      >
+      <TextField variant="outlined" label="Search by Name" onChange={handleSearchChange} style={{ marginBottom: 16 }} />
+      <Button variant="contained" color="primary" onClick={handlePrint} style={{ marginBottom: 16, marginLeft: 16 }}>
         <Print />
         Print
       </Button>
@@ -146,14 +154,16 @@ const SchemeStudent = () => {
         <TableContainer component={Paper} ref={tableRef}>
           <Table>
             <TableHead>
-              <TableRow style={{backgroundColor:"black"}}>
-                <TableCell style={{color:"white"}}>ID</TableCell>
-                <TableCell style={{color:"white"}}>Name</TableCell>
-                <TableCell style={{color:"white"}}>Gender</TableCell>
-                <TableCell style={{color:"white"}}>Class</TableCell>
-                <TableCell style={{color:"white"}}>Scheme Amount</TableCell>
-                <TableCell style={{color:"white"}}>Pending Fees</TableCell>
-                <TableCell style={{color:"white"}} className="no-print">Actions</TableCell>
+              <TableRow style={{ backgroundColor: 'black' }}>
+                <TableCell style={{ color: 'white' }}>ID</TableCell>
+                <TableCell style={{ color: 'white' }}>Name</TableCell>
+                <TableCell style={{ color: 'white' }}>Gender</TableCell>
+                <TableCell style={{ color: 'white' }}>Class</TableCell>
+                <TableCell style={{ color: 'white' }}>Scheme Amount</TableCell>
+                <TableCell style={{ color: 'white' }}>Pending Fees</TableCell>
+                <TableCell style={{ color: 'white' }} className="no-print">
+                  Actions
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -164,13 +174,28 @@ const SchemeStudent = () => {
                   <TableCell>{student.gender}</TableCell>
                   <TableCell>{getClassName(student.cls_id)}</TableCell>
                   <TableCell>{student.scheme}</TableCell>
-                  <TableCell style={{color:"red",fontWeight:"bolder"}}>{student.schemeRemaningFees}</TableCell>
-                  <TableCell className="no-print"> {/* Added class for hiding on print */}
+                  <TableCell style={{ color: 'red', fontWeight: 'bolder' }}>{student.schemeRemaningFees}</TableCell>
+                  {/* <TableCell className="no-print"> 
                                     <Link to={`/schemepayfees/${student.stu_id}`}>  <Button style={{ marginTop: "20px", }} startIcon={<Edit />} variant='contained' color='info'>Pay fees</Button></Link>
                                         <IconButton color="error" onClick={() => handleDeleteStudent(student.stu_id)}>
                                             <Delete />
                                         </IconButton>
-                                    </TableCell>
+                                    </TableCell> */}
+
+                  <TableCell className="no-print">
+                    {student.schemeRemaningFees === 0 ? (
+                      <span style={{ fontSize: 18, fontWeight: 'bolder', marginLeft: '30px' }}>Paid</span>
+                    ) : (
+                      <Link to={`/schemepayfees/${student.stu_id}`}>
+                        <Button style={{ marginTop: '20px' }} startIcon={<Edit />} variant="contained" color="info">
+                          Pay fees
+                        </Button>
+                        <IconButton color="error" onClick={() => handleDeleteStudent(student.stu_id)}>
+                          <Delete />
+                        </IconButton>
+                      </Link>
+                    )}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

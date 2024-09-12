@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useTheme } from '@mui/material/styles';
@@ -63,13 +61,14 @@ const MonthlyBarChart = () => {
   });
 
   useEffect(() => {
-    axios.get(`${config.apiURL}/dashboard/feesLogs/day`)
-      .then(response => {
+    axios
+      .get(`${config.apiURL}/dashboard/feesLogs/day`)
+      .then((response) => {
         // Process the API data to update the series state
-        const newData = response.data.map(item => parseFloat(item.total_paid_amount_current_week));
+        const newData = response.data.map((item) => parseFloat(item.total_paid_amount_current_week));
         setSeries([{ data: newData }]);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, []); // Only execute once on component mount
@@ -82,4 +81,3 @@ const MonthlyBarChart = () => {
 };
 
 export default MonthlyBarChart;
-
